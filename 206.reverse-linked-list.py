@@ -15,6 +15,7 @@ class Solution:
     def reverseList(self, head):
         new_head = None
         while head:
+            # 第一步首先需要备份，备份后才可以修改head指针
             tmp = head.next
             head.next = new_head
             new_head = head
