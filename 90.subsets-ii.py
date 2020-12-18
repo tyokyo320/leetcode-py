@@ -15,6 +15,7 @@ class Solution:
         result.append(item)
         self.generate(0, nums, item, result)
 
+        # 这里是去除重复集合，排序是必不可少的
         for i in result:
             sort_list = sorted(i)
             if sort_list not in res_set:
