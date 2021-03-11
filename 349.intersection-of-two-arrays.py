@@ -46,7 +46,6 @@ class Solution:
 
         '''
         方法4：hash
-        '''
         hashmap = {}
         result = []
         for n in nums1:
@@ -59,10 +58,29 @@ class Solution:
                 # It will set the value of hashmap[n] = 0 which will indicate we already added n in result
                 hashmap[n] -= 1
         return result
+        '''
 
         '''
         方法5：binary-search
         '''
+        if len(nums1) < len(nums2):
+            nums1, nums2 = nums2, nums1
+        
+        result = []
+        nums1 = sorted(nums1)
+        nums2 = set(nums2)
 
-
+        for i in nums2:
+            left, right = 0, len(nums1) - 1
+            while left <= right:
+                mid = (right + left) >> 1
+                if nums1[mid] == i:
+                    result.append(nums1[mid])
+                    break
+                else:
+                    if nums1[mid] < i:
+                        left = mid + 1
+                    else:
+                        right = mid - 1
+        return result
 # @lc code=end
