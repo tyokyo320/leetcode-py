@@ -31,6 +31,18 @@ class SortAlgorithms():
 
         return array
 
+    def bubbleSort(self, array):
+        for i in range(len(array) - 1):
+            # 以后每次循环的次数为arr.length-1-i
+            for j in range(len(array) - i - 1):
+                # 相邻两个元素作比较，如果前面元素大于后面，进行交换
+                if array[j] > array[j + 1]:
+                    array[j], array[j + 1] = array[j + 1], array[j]
+        
+        return array
+
+
+
 
 if __name__ == "__main__":
     s = SortAlgorithms()
@@ -40,5 +52,8 @@ if __name__ == "__main__":
     # array = s.insertionSort(unsorted_array)
 
     # 选择排序
-    array = s.selectionSort(unsorted_array)
+    # array = s.selectionSort(unsorted_array)
+
+    # 冒泡排序
+    array = s.bubbleSort(unsorted_array)
     print(array)
