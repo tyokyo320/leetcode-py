@@ -79,10 +79,30 @@ class SortAlgorithms():
         for i in range(n-1, 0, -1):
             # 交换现在的根节点至最后
             array[i], array[0] = array[0], array[i]
-            
+
             # 重新创建最大堆，确保array[0]是[0, i]中的最大值
             # 注意这里一定要将顶堆限制在[0, i]的范围内，否则刚抽取出的最大值又被放到最大堆的起始了！
             self.heapify(array, i, 0)
+
+        return array
+
+    def partition(self, array, low, high):
+        i = low - 1
+        pivot = array[high]
+
+        for j in range(low, high):
+            if array[j] < pivot:
+                i += 1
+                array[i], array[j] = array[j], array[i]
+
+        array[i+1], array[high] = array[high], array[i+1]
+        return i+1
+
+    def quickSort(self, array, low, high):
+        if low < high:
+            mid = self.partition(array, low, high)
+            self.quickSort(array, low, mid-1)
+            self.quickSort(array, mid+1, high)
 
         return array
 
@@ -101,5 +121,8 @@ if __name__ == "__main__":
     # array = s.bubbleSort(unsorted_array)
 
     # 堆排序
-    array = s.heapSort(unsorted_array)
+    # array = s.heapSort(unsorted_array)
+
+    # 快速排序
+    array = s.quickSort(unsorted_array, 0, len(unsorted_array) - 1)
     print(array)
