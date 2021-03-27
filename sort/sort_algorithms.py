@@ -88,7 +88,8 @@ class SortAlgorithms():
 
     def partition(self, array, low, high):
         '''
-        pivot：low
+        方法1：pivot：low
+
         pivot = array[low];
         while low < high:
             while low < high and array[high] > pivot:
@@ -110,18 +111,40 @@ class SortAlgorithms():
         '''
 
         '''
-        pivot：high
-        '''
+        方法2：pivot：high
+
+
         i = low - 1
         pivot = array[high]
 
         for j in range(low, high):
-            if array[low] < pivot:
+            if array[j] < pivot:
                 i += 1
                 array[i], array[j] = array[j], array[i]
         
         array[i + 1], array[high] = array[high], array[i + 1]
         return i + 1
+        '''
+
+        '''
+        方法3：pivot：high
+
+        '''
+        i = low
+        j = high - 1
+
+        pivot = array[high]
+
+        while i < j:
+            while array[i] < pivot:
+                i += 1
+            while array[j] > pivot:
+                j -= 1
+            if i < j:
+                array[i], array[j] = array[j], array[i]
+        
+        array[i], array[high] = array[high], array[i]
+        return i
 
     def quickSort(self, array, low, high):
         if low < high:
