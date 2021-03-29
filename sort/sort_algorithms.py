@@ -94,7 +94,7 @@ class SortAlgorithms():
         while low < high:
             while low < high and array[high] > pivot:
                 high -= 1
-            
+
             # 交换比基准大的记录到左端
             array[low] = array[high]
 
@@ -103,7 +103,7 @@ class SortAlgorithms():
 
             # 交换比基准小的记录到右端
             array[high] = array[low]
-        
+
         # 扫描完成，基准到位
         array[low] = pivot
         # 返回的是基准的位置
@@ -142,7 +142,7 @@ class SortAlgorithms():
                 j -= 1
             if i < j:
                 array[i], array[j] = array[j], array[i]
-        
+
         array[i], array[high] = array[high], array[i]
         return i
 
@@ -151,6 +151,51 @@ class SortAlgorithms():
             mid = self.partition(array, low, high)
             self.quickSort(array, low, mid-1)
             self.quickSort(array, mid+1, high)
+
+        return array
+
+    def merge(self, array, l, m, r):
+        # the size of L[]
+        n1 = m - l + 1
+        # the size of R[]
+        n2 = r - m
+
+        L = [0] * n1
+        R = [0] * n2
+
+        for i in range(0, n1):
+            L[i] = array[l + i]
+        for j in range(0, n2):
+            R[j] = array[m + 1 + j]
+
+        i = 0
+        j = 0
+        k = l
+
+        while i < n1 and j < n2:
+            if L[i] <= R[j]:
+                array[k] = L[i]
+                i += 1
+            else:
+                array[k] = R[j]
+                j += 1
+            k += 1
+
+        while i < n1:
+            array[k] = L[i]
+            i += 1
+            k += 1
+        while j < n2:
+            array[k] = R[j]
+            j += 1
+            k += 1
+
+    def mergeSort(self, array, l, r):
+        if l < r:
+            mid = int(l + (r - l) / 2)
+            self.mergeSort(array, l, mid)
+            self.mergeSort(array, mid+1, r)
+            self.merge(array, l, mid, r)
 
         return array
 
@@ -172,5 +217,8 @@ if __name__ == "__main__":
     # array = s.heapSort(unsorted_array)
 
     # 快速排序
-    array = s.quickSort(unsorted_array, 0, len(unsorted_array) - 1)
+    # array = s.quickSort(unsorted_array, 0, len(unsorted_array) - 1)
+
+    # 归并排序
+    array = s.mergeSort(unsorted_array, 0, len(unsorted_array) - 1)
     print(array)
