@@ -199,6 +199,26 @@ class SortAlgorithms():
 
         return array
 
+    def countingSort(self, array):
+        # 获取最大，最小值
+        largest = max(array)
+        smallest = min(array)
+        # 用于统计个数的空数组，初始化为0
+        counter = [0 for i in range(largest - smallest + 1)]
+        # 桶内索引值
+        index = 0
+
+        # 统计每个元素出现的次数
+        for i in range(len(array)):
+            counter[array[i] - smallest] += 1
+        for j in range(len(counter)):
+            while counter[j] > 0:
+                # 取出元素
+                array[index] = j + smallest
+                index += 1
+                counter[j] -= 1
+        return array
+
 
 if __name__ == "__main__":
     s = SortAlgorithms()
@@ -220,5 +240,8 @@ if __name__ == "__main__":
     # array = s.quickSort(unsorted_array, 0, len(unsorted_array) - 1)
 
     # 归并排序
-    array = s.mergeSort(unsorted_array, 0, len(unsorted_array) - 1)
+    # array = s.mergeSort(unsorted_array, 0, len(unsorted_array) - 1)
+
+    # 计数排序
+    array = s.countingSort(unsorted_array)
     print(array)
