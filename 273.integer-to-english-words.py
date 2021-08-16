@@ -57,7 +57,7 @@ class Solution:
 
         if num == 0:
             return 'Zero'
-        
+
         for i in range(0, len(str(num)), 3):
             # 从最后3位数字开始获取
             num, rem = divmod(num, 1000)
@@ -65,7 +65,7 @@ class Solution:
                 if i >= 3:
                     self.result.append(self.mapping_table[10**i])
                 self.result.extend(self.getHundreds(rem))
-        
+
         # print(self.result)
         return ' '.join(self.result[::-1]).title()
 
@@ -91,7 +91,7 @@ class Solution:
                     num, rem = divmod(num, 10)
                     if rem:
                         result.append(self.mapping_table[rem*10**i])
-        
+
         return result
 
     # 获取 10**3 以下的数字
@@ -113,5 +113,5 @@ class Solution:
             result.append(self.mapping_table[100])
             result.append(self.mapping_table[num])
         return result
-    
+
 # @lc code=end
