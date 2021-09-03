@@ -13,7 +13,6 @@ class Solution:
 
         for num in arr:
             keep, delete = max(keep+num, num), max(keep, delete+num)
-            print(keep, delete)
             ans = max(keep, delete, ans)
 
         return ans
